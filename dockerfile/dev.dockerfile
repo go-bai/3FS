@@ -24,7 +24,7 @@ RUN apt-get update                                    &&\
   apt-get clean                                       &&\
   rm -rf /var/lib/apt/lists/*
 
-ARG FDB_VERSION=7.3.63
+ARG FDB_VERSION=7.3.62
 RUN FDB_ARCH_SUFFIX=$(dpkg --print-architecture) && \
     case "${FDB_ARCH_SUFFIX}" in \
       amd64) ;; \
@@ -47,5 +47,5 @@ RUN wget -O- ${LIBFUSE_DOWNLOAD_URL}        |\
   rm -f -r /tmp/fuse-${LIBFUSE_VERSION}*
 
 # Install Rust
-RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+RUN wget -qO- https://sh.rustup.rs | sh -s -- -y
 ENV PATH="/root/.cargo/bin:${PATH}"
